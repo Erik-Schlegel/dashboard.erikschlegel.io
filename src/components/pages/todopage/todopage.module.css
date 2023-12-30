@@ -1,0 +1,7 @@
+
+.todoPage {
+   flex-grow: 1;
+   display: flex;
+   flex-direction: column;
+   border-radius: var(--M_BorderRadius);
+}

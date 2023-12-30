@@ -13,10 +13,10 @@ S_ = Spaces
    --B_Secondary: #FF0000;
 
    /*Interactables*/
-   --I_PrimaryBtnBorder: #FF0000;
-   --I_PrimaryBtnBg: #FF0000;
-   --I_PrimaryBtnBg-Hover: #FF0000;
-   --I_PrimaryBtnText: #FF0000;
+   --I_PrimaryBtnBorder: #3a3a3a;
+   --I_PrimaryBtnBg: #cd701b;
+   --I_PrimaryBtnBg-Hover: #ff7a00b3;
+   --I_PrimaryBtnText: #CFD1D5;
    --I_PrimaryBtnText-Hover: #FF0000;
    --I_SecondaryBtnBorder: #FF0000;
    --I_SecondaryBtnBg: #FF0000;
@@ -59,19 +59,22 @@ S_ = Spaces
    --B_Secondary: #FF0000;
 
    /* Interactables */
-   --I_PrimaryBtnBorder: #FF0000;
-   --I_PrimaryBtnBg: #FF0000;
-   --I_PrimaryBtnBg-Hover: #FF0000;
-   --I_PrimaryBtnText: #FF0000;
-   --I_PrimaryBtnText-Hover: #FF0000;
-   --I_SecondaryBtnBorder: #FF0000;
-   --I_SecondaryBtnBg: #FF0000;
-   --I_SecondaryBtnBg-Hover: #FF0000;
-   --I_SecondaryBtnText: #FF0000;
-   --I_SecondaryBtnText-Hover: #FF0000;
-   --I_DisabledBtnBorder: #FF0000;
-   --I_DisabledBtn: #FF0000;
-   --I_DisabledBtnText: #FF0000;
+   --I_PrimaryBtnBorder: #3a3a3a;
+   --I_PrimaryBtnBg: #cd701b;
+   --I_PrimaryBtnBg-Hover: #975517;
+   --I_PrimaryBtnText: #CFD1D5;
+   --I_PrimaryBtnText-Hover: #e0e1e4;
+
+   --I_SecondaryBtnBorder: #3a3a3a;
+   --I_SecondaryBtnBg: #3A6EA5;
+   --I_SecondaryBtnBg-Hover: #2f5986;
+   --I_SecondaryBtnText: #CFD1D5;
+   --I_SecondaryBtnText-Hover: #e0e1e4;
+
+   --I_DisabledBtnBorder: #3a3a3a;
+   --I_DisabledBtnBg: #3a3a3a81;
+   --I_DisabledBtnText: #585858;
+
    --I_InputBorder: #FF0000;
    --I_InputPlaceholder: #FF0000;
    --I_InputValue: #FF0000;
@@ -93,6 +96,6 @@ S_ = Spaces
    --S_MainBg: #1F2124;
    --S_NavBorder: #FF0000;
    --S_NavBg: #24262B;
-   --S_PanelBorder: #FF0000;
-   --S_PanelBg: #FF0000;
+   --S_PanelBorder: #454648;
+   --S_PanelBg: #44464A;
 }

@@ -1,0 +1,10 @@
+
+.contentTemplate__title {
+   height: 50px;
+}
+
+.contentTemplate__wrapper {
+   margin-top: var(--M_Gap);
+   overflow: hidden;
+   display:flex;
+}

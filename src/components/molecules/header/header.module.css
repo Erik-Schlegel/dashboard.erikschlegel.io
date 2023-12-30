@@ -4,7 +4,6 @@
    grid-template-columns: auto 1fr;
    grid-gap: var(--M_Gap);
    align-items: center;
-   padding: var(--M_Gap2\3);
    padding-left: var(--M_Gap);
    color: var(--T_Std);
 

@@ -1,0 +1,42 @@
+
+.button {
+   min-width: var(--M_MinClickable);
+   min-height: var(--M_MinClickable);
+   border-radius: var(--M_BorderRadius);
+   padding: var(--M_Gap1\2) var(--M_Gap);
+   border: 1px solid;
+   font-weight: bold;
+   font-size: 1.7rem;
+   display: block;
+   cursor: pointer;
+}
+
+.primary {
+   background-color: var(--I_PrimaryBtnBg);
+   color: var(--I_PrimaryBtnText);
+   border-color: var(--I_PrimaryBtnBorder);
+}
+
+.primary:hover {
+   background-color: var(--I_PrimaryBtnBg-Hover);
+   color: var(--I_PrimaryBtnText-Hover);
+}
+
+.secondary {
+   background-color: var(--I_SecondaryBtnBg);
+   color: var(--I_SecondaryBtnText);
+   border-color: var(--I_SecondaryBtnBorder);
+}
+
+.secondary:hover {
+   background-color: var(--I_SecondaryBtnBg-Hover);
+   color: var(--I_SecondaryBtnText-Hover);
+}
+
+.disabled {
+   background-color: var(--I_DisabledBtnBg);
+   color: var(--I_DisabledBtnText);
+   border-color: var(--I_DisabledBtnBorder);
+   cursor: not-allowed;
+}
+

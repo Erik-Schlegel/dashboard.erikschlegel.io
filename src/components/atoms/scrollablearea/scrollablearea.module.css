@@ -1,0 +1,4 @@
+.scrollableArea {
+    overflow-y: auto;
+    padding-right: var(--M_Gap);
+}

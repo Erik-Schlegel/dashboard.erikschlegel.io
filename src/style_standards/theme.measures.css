@@ -11,4 +11,6 @@
    --M_Gap2\3: calc(var(--M_Gap) * 2 / 3);
 
    --M_MinClickable: 4.4rem;
+
+   --M_BorderRadius: 0.4rem;
 }
