@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import ScrollableArea from "_atoms/scrollablearea/scrollablearea";
 import ContentTemplate from "_templates/contenttemplate/contenttemplate";
@@ -8,10 +8,32 @@ import Button from "_atoms/button/button";
 
 import styles from "./todopage.module.css";
 
+const items = [
+   {
+      title: "abcdef",
+   },
+   {
+      title: "ghijkl",
+   },
+   {
+      title: "mnopqr",
+   },
+   {
+      title: "stuvwx",
+   },
+   {
+      title: "yz1234",
+   },
+];
+
 /* prettier-ignore */
 
 const TodoPage = () =>
 {
+   const [openItem, setOpenItem] = useState<string | null>(null);
+
+   const handleToggleOpen = (title: string) =>
+      setOpenItem(openItem === title ? null : title);
 
    return (
       <ContentTemplate title="Todo">
@@ -22,12 +44,11 @@ const TodoPage = () =>
             </div>
 
             <ScrollableArea>
-
-               <TodoItem title='something really easy to complete' />
-               <TodoItem title='something really easy to complete' />
-               <TodoItem title='something really easy to complete' />
-               <TodoItem title='something really easy to complete' />
-
+               {
+                  items.map((item, i) => (
+                     <TodoItem key={i} title={item.title} isOpen={openItem === item.title} onToggleOpen={()=> handleToggleOpen(item.title)} />
+                  ))
+               }
             </ScrollableArea>
 
          </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import classNames from "classnames";
 
 import Button from "_atoms/button/button";
@@ -8,17 +8,13 @@ import styles from "./todoitem.module.css";
 type TodoItemProps = {
    title: string;
    onToggleOpen?: () => void;
+   isOpen?: boolean;
 };
 
-const TodoItem = ({ title, onToggleOpen }: TodoItemProps) => {
-   const [isOpen, setIsOpen] = useState(false);
+/* prettier-ignore */
+const TodoItem = ({ title, onToggleOpen, isOpen = false }: TodoItemProps) =>
+{
 
-   const handleTitleClick = () => {
-      setIsOpen(!isOpen);
-      onToggleOpen && onToggleOpen();
-   };
-
-   /* prettier-ignore */
    return (
 
       <section className={styles.todoItem}>
@@ -26,7 +22,7 @@ const TodoItem = ({ title, onToggleOpen }: TodoItemProps) => {
          <div className={styles.todoItem__titleArea}>
             <div>
                <span className={styles.todoItem__titleArea__handle}>:::</span>
-               <span className={styles.todoItem__titleArea__title} onClick={handleTitleClick}>
+               <span className={styles.todoItem__titleArea__title} onClick={onToggleOpen}>
                   {title}
                </span>
             </div>
