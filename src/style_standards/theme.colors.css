@@ -1,0 +1,98 @@
+/* The BITS method is used to identify the different parts of the theme.
+B_ = Brand
+I_ = Interactables
+T_ = Text
+S_ = Spaces
+*/
+
+
+:root
+{
+   /*Brand*/
+   --B_Primary: #FF0000;
+   --B_Secondary: #FF0000;
+
+   /*Interactables*/
+   --I_PrimaryBtnBorder: #FF0000;
+   --I_PrimaryBtnBg: #FF0000;
+   --I_PrimaryBtnBg-Hover: #FF0000;
+   --I_PrimaryBtnText: #FF0000;
+   --I_PrimaryBtnText-Hover: #FF0000;
+   --I_SecondaryBtnBorder: #FF0000;
+   --I_SecondaryBtnBg: #FF0000;
+   --I_SecondaryBtnBg-Hover: #FF0000;
+   --I_SecondaryBtnText: #FF0000;
+   --I_SecondaryBtnText-Hover: #FF0000;
+   --I_DisabledBtnBorder: #FF0000;
+   --I_DisabledBtn: #FF0000;
+   --I_DisabledBtnText: #FF0000;
+   --I_InputBorder: #FF0000;
+   --I_InputPlaceholder: #FF0000;
+   --I_InputValue: #FF0000;
+   --I_Link: #FF0000;
+   --I_Link-Hover: #FF0000;
+   --I_LinkIcon: #FF0000;
+   --I_LinkIcon-Hover: #FF0000;
+
+   /*Text*/
+   --T_Std: #D3D5D9;
+   --T_InOn: #FF0000;
+   --T_Caution: #FF0000;
+   --T_Error: #FF0000;
+
+   /*Spaces*/
+   --S_HeaderBorder: #FF0000;
+   --S_HeaderBg: #FF0000;
+   --S_MainBorder: #FF0000;
+   --S_MainBg: #FF0000;
+   --S_NavBorder: #FF0000;
+   --S_NavBg: #FF0000;
+   --S_PanelBorder: #FF0000;
+   --S_PanelBg: #FF0000;
+}
+
+
+[data-theme="dark"]
+{
+   /* Brand */
+   --B_Primary: #FF0000;
+   --B_Secondary: #FF0000;
+
+   /* Interactables */
+   --I_PrimaryBtnBorder: #FF0000;
+   --I_PrimaryBtnBg: #FF0000;
+   --I_PrimaryBtnBg-Hover: #FF0000;
+   --I_PrimaryBtnText: #FF0000;
+   --I_PrimaryBtnText-Hover: #FF0000;
+   --I_SecondaryBtnBorder: #FF0000;
+   --I_SecondaryBtnBg: #FF0000;
+   --I_SecondaryBtnBg-Hover: #FF0000;
+   --I_SecondaryBtnText: #FF0000;
+   --I_SecondaryBtnText-Hover: #FF0000;
+   --I_DisabledBtnBorder: #FF0000;
+   --I_DisabledBtn: #FF0000;
+   --I_DisabledBtnText: #FF0000;
+   --I_InputBorder: #FF0000;
+   --I_InputPlaceholder: #FF0000;
+   --I_InputValue: #FF0000;
+   --I_Link: #CFD1D5;
+   --I_Link-Hover: #FF0000;
+   --I_LinkIcon: #FF0000;
+   --I_LinkIcon-Hover: #FF0000;
+
+   /* Text */
+   --T_Std: #D3D5D9;
+   --T_InOn: #FF0000;
+   --T_Caution: #FF0000;
+   --T_Error: #FF0000;
+
+   /* Spaces */
+   --S_HeaderBorder: #FF0000;
+   --S_HeaderBg: #34363A;
+   --S_MainBorder: #FF0000;
+   --S_MainBg: #1F2124;
+   --S_NavBorder: #FF0000;
+   --S_NavBg: #24262B;
+   --S_PanelBorder: #FF0000;
+   --S_PanelBg: #FF0000;
+}

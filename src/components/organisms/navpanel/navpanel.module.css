@@ -1,0 +1,28 @@
+.navPanel {
+   display: grid;
+   grid-template-columns: 1fr var(--M_MinClickable);
+}
+
+.navPanel__nav {
+   background-color: var(--S_NavBg);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.navPanel__column {
+   background-color: var(--S_MainBg);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.navPanel__handle {
+   cursor: pointer;
+   color: var(--I_Link);
+   height: var(--M_MinClickable);
+   width: var(--M_MinClickable);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}

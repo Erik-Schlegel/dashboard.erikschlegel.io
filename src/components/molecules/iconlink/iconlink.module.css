@@ -1,0 +1,11 @@
+
+.iconLink {
+   display: flex;
+   align-items: center;
+   cursor: pointer;
+}
+
+.iconLink__text {
+   color: var(--I_Link);
+   margin-left: 10px;
+}

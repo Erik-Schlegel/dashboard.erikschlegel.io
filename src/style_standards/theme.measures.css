@@ -1,0 +1,14 @@
+
+:root
+{
+   --M_Gap: 1.6rem;
+
+   --M_Gap2x: calc(var(--M_Gap) * 2);
+   --M_Gap3x: calc(var(--M_Gap) * 3);
+   --M_Gap4x: calc(var(--M_Gap) * 4);
+
+   --M_Gap1\2: calc(var(--M_Gap) / 2);
+   --M_Gap2\3: calc(var(--M_Gap) * 2 / 3);
+
+   --M_MinClickable: 4.4rem;
+}

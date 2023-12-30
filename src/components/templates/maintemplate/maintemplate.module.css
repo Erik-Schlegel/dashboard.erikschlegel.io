@@ -1,0 +1,31 @@
+
+.mainTemplate
+{
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+}
+
+.header
+{
+   height: auto;
+}
+
+.content
+{
+   display: grid;
+   grid-template-columns: 300px 1fr;
+   flex-grow: 1;
+}
+
+.content__main
+{
+   flex-grow: 1;
+   background-color: var(--S_MainBg);
+   padding: var(--M_Gap);
+   color: var(--T_Std);
+}
+
+.content__main__wrapper {
+   margin-top: var(--M_Gap);
+}
