@@ -1,4 +1,26 @@
 
+.todoItemForm {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-template-rows: 1fr;
+   gap: var(--M_Gap);
+}
+
+.todoItemForm__1st {
+   display: grid;
+   gap: var(--M_Gap);
+   grid-template-columns: 1fr 1fr;
+}
+
+.todoItemForm__1st__doubleWide {
+   grid-column-start: span 2;
+}
+
+.todoItemForm__2nd {
+   display: grid;
+   grid-template-rows: auto 1fr;
+}
+
 .todoItem {
    display: flex;
    flex-direction: column;

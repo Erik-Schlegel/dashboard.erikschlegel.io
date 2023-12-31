@@ -1,0 +1,20 @@
+
+.inputSelect {
+   background-color: rgba(0,0,0,0);
+   border: 1px solid var(--I_InputBorder);
+   border-radius: var(--M_BorderRadius);
+   min-height: var(--M_MinClickable);
+   display: inline-block;
+   padding-left: var(--M_Gap);
+   padding-right: var(--M_Gap);
+   font-size: 1.6rem;
+   color: var(--I_InputValue);
+   outline: none;
+   width: 100%;
+}
+
+.label {
+   font-size: 1.6rem;
+   padding-bottom: var(--M_Gap1\2);
+   display: block;
+}

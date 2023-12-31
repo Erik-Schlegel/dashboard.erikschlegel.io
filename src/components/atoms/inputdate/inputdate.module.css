@@ -1,0 +1,29 @@
+
+.inputDate {
+   background-color: rgba(0,0,0,0);
+   border: 1px solid var(--I_InputBorder);
+   border-radius: var(--M_BorderRadius);
+   min-height: var(--M_MinClickable);
+   display: input-block;
+   padding-left: var(--M_Gap);
+   font-size: 1.6rem;
+   color: var(--I_InputValue);
+   outline: none;
+   width: 100%;
+}
+
+
+/* <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23CFD1D5'><path d='M5 1h2V0h2v1h2a2 2 0 0 1 2 2v1H1V3a2 2 0 0 1 2-2h2V0h2v1zm0 4h6a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z'/></svg> */
+
+.inputDate::-webkit-calendar-picker-indicator {
+   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d3d5d99b'><path d='M0 0h24v24H0z' fill='none'/><path d='M19 21H5a2 2 0 0 1-2-2V8h18v11a2 2 0 0 1-2 2zm0-13H3V5a2 2 0 0 1 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v3zm-7 8h2v2h-2v-2z'/></svg>") no-repeat;
+   background-size: 1.2em;
+   background-position: center;
+   color: transparent;
+}
+
+.label {
+   font-size: 1.6rem;
+   padding-bottom: var(--M_Gap1\2);
+   display: block;
+}
