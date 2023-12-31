@@ -1,5 +1,4 @@
 import React from "react";
-import classNames from "classnames";
 
 import styles from "./inputtext.module.css";
 
@@ -15,7 +14,7 @@ type InputTextProps = {
 const InputText = ({name, label, placeholder, onChange, className}: InputTextProps) =>
 {
    return (
-      <div>
+      <div className={className}>
          {label && (
             <label htmlFor={name} className={styles.label}>{label}</label>
          )}
@@ -23,7 +22,7 @@ const InputText = ({name, label, placeholder, onChange, className}: InputTextPro
             name={name}
             placeholder={placeholder}
             onChange={onChange}
-            className={classNames(styles.inputText, className)}
+            className={styles.inputText}
          />
       </div>
    )

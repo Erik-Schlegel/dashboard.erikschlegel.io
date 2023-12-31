@@ -8,7 +8,6 @@
    padding-left: var(--M_Gap);
    font-size: 1.6rem;
    color: var(--I_InputValue);
-   outline: none;
    width: 100%;
 }
 

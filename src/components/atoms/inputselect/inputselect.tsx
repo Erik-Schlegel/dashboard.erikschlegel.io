@@ -16,13 +16,13 @@ type InputSelectProps = {
 const InputSelect = ({ name, label, options, defaultIndex, onChange, className }: InputSelectProps) =>
 {
    return (
-      <div>
+      <div className={classNames(styles.inputSelect, className)}>
          {label && (
-            <label htmlFor={name} className={styles.label}>
+            <label htmlFor={name} className={styles.inputSelect__label}>
                {label}
             </label>
          )}
-         <select name={name} onChange={onChange} className={classNames(styles.inputSelect, className)}>
+         <select name={name} onChange={onChange} className={styles.inputSelect__ui}>
             {
                options.map((option, i) =>
                (

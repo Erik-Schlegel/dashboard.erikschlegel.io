@@ -4,6 +4,7 @@
    grid-template-columns: repeat(2, 1fr);
    grid-template-rows: 1fr;
    gap: var(--M_Gap);
+   padding: var(--M_Gap1\2);
 }
 
 .todoItemForm__1st {

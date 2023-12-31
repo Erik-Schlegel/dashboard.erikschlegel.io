@@ -20,16 +20,18 @@ const InputDate = ({ name, label, onChange, minDate=new Date(), defaultValue=new
 
 
    return (
-      <div>
+      <div className={className}>
          {
             label &&
-            <label htmlFor={name} className={styles.label}>{label}</label>
+            <label htmlFor={name} className={styles.label}>
+               {label}
+            </label>
          }
          <input type="date" name={name}
             onChange={onChange}
             min={min}
             defaultValue={def}
-            className={classNames(styles.inputDate, className)}
+            className={styles.inputDate}
          />
       </div>
 

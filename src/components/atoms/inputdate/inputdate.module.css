@@ -20,6 +20,9 @@
    background-size: 1.2em;
    background-position: center;
    color: transparent;
+   position: relative;
+   left: -5px;
+   cursor: pointer;
 }
 
 .label {

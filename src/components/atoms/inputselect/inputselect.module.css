@@ -1,5 +1,14 @@
-
 .inputSelect {
+   position:relative;
+}
+
+.inputSelect__label {
+   font-size: 1.6rem;
+   padding-bottom: var(--M_Gap1\2);
+   display: block;
+}
+
+.inputSelect__ui {
    background-color: rgba(0,0,0,0);
    border: 1px solid var(--I_InputBorder);
    border-radius: var(--M_BorderRadius);
@@ -9,12 +18,5 @@
    padding-right: var(--M_Gap);
    font-size: 1.6rem;
    color: var(--I_InputValue);
-   outline: none;
    width: 100%;
-}
-
-.label {
-   font-size: 1.6rem;
-   padding-bottom: var(--M_Gap1\2);
-   display: block;
 }
