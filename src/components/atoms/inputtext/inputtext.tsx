@@ -4,6 +4,7 @@ import styles from "./inputtext.module.css";
 
 type InputTextProps = {
    name: string;
+   value?: string;
    label?: string;
    placeholder?: string;
    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -11,7 +12,7 @@ type InputTextProps = {
 };
 
 /* prettier-ignore */
-const InputText = ({name, label, placeholder, onChange, className}: InputTextProps) =>
+const InputText = ({name, value, label, placeholder, onChange, className}: InputTextProps) =>
 {
    return (
       <div className={className}>
@@ -19,6 +20,7 @@ const InputText = ({name, label, placeholder, onChange, className}: InputTextPro
             <label htmlFor={name} className={styles.label}>{label}</label>
          )}
          <input type='text'
+            defaultValue={value}
             name={name}
             placeholder={placeholder}
             onChange={onChange}

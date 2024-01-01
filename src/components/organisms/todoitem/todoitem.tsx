@@ -10,14 +10,14 @@ import InputTextArea from "_atoms/inputtextarea/inputtextarea";
 import styles from "./todoitem.module.css";
 
 type TodoItemProps = {
-   title: string;
+   data: any;
    onToggleOpen?: () => void;
    isOpen?: boolean;
    className?: string;
 };
 
 /* prettier-ignore */
-const TodoItem = ({ title, onToggleOpen, isOpen = false, className }: TodoItemProps) =>
+const TodoItem = ({ data, onToggleOpen, isOpen = false, className }: TodoItemProps) =>
 {
 
    return (
@@ -28,7 +28,7 @@ const TodoItem = ({ title, onToggleOpen, isOpen = false, className }: TodoItemPr
             <div>
                <span className={styles.todoItem__titleArea__handle}>:::</span>
                <span className={styles.todoItem__titleArea__title} onClick={onToggleOpen}>
-                  {title}
+                  {data.title}
                </span>
             </div>
             <div className={styles.todoItem__titleArea__options}>
@@ -45,7 +45,7 @@ const TodoItem = ({ title, onToggleOpen, isOpen = false, className }: TodoItemPr
 
                <div className={styles.todoItemForm}>
                   <div className={styles.todoItemForm__1st}>
-                     <InputText label="Title" name="title" placeholder="title" className={styles.todoItemForm__1st__doubleWide}  />
+                     <InputText label="Title" name="title" placeholder="title" className={styles.todoItemForm__1st__doubleWide} value={data.title}  />
                      <InputSelect label="Priority" name="priority" options={['low', 'medium', 'high']} defaultIndex={1} className={styles.todoItemForm__1st__doubleWide}  />
 
                      <InputDate label="Start On" name="startDate" />

@@ -11,30 +11,39 @@ import styles from "./todopage.module.css";
 const items = [
    {
       title: "abcdef",
+      id: "abcdef",
    },
    {
       title: "ghijkl",
+      id: "ghijkl",
    },
    {
       title: "mnopqr",
+      id: "mnopqr",
    },
    {
       title: "stuvwx",
+      id: "stuvwx",
    },
    {
       title: "123",
+      id: "123",
    },
    {
       title: "456",
+      id: "456",
    },
    {
       title: "789",
+      id: "789",
    },
    {
       title: "abc",
+      id: "abc",
    },
    {
       title: "yz1234",
+      id: "yz1234",
    },
 ];
 
@@ -64,11 +73,12 @@ const TodoPage = () =>
                <ScrollableArea>
                   {
                      items.map((item, i) => (
-                        <TodoItem key={i} title={item.title} isOpen={openItem === item.title} onToggleOpen={()=> handleToggleOpen(item.title)} />
+                        <TodoItem data={item} key={i} isOpen={openItem === item.title} onToggleOpen={()=> handleToggleOpen(item.title)} />
                      ))
                   }
                </ScrollableArea>
             </div>
+
 
          </div>
       </ContentTemplate>
