@@ -22,6 +22,18 @@ const items = [
       title: "stuvwx",
    },
    {
+      title: "123",
+   },
+   {
+      title: "456",
+   },
+   {
+      title: "789",
+   },
+   {
+      title: "abc",
+   },
+   {
       title: "yz1234",
    },
 ];
@@ -39,17 +51,24 @@ const TodoPage = () =>
       <ContentTemplate title="Todo">
          <div className={styles.todoPage}>
 
-            <div style={{marginBottom: 'var(--M_Gap)'}}>
-               <Button text="Add" />
+            <div className={styles.todoPage__buckets}>
+               <div>backlog</div>
+               <div>current</div>
+               <div>scheduled</div>
             </div>
 
-            <ScrollableArea>
-               {
-                  items.map((item, i) => (
-                     <TodoItem key={i} title={item.title} isOpen={openItem === item.title} onToggleOpen={()=> handleToggleOpen(item.title)} />
-                  ))
-               }
-            </ScrollableArea>
+            <div className={styles.todoPage__collection}>
+               <div style={{marginBottom: 'var(--M_Gap)'}}>
+                  <Button text="Add" />
+               </div>
+               <ScrollableArea>
+                  {
+                     items.map((item, i) => (
+                        <TodoItem key={i} title={item.title} isOpen={openItem === item.title} onToggleOpen={()=> handleToggleOpen(item.title)} />
+                     ))
+                  }
+               </ScrollableArea>
+            </div>
 
          </div>
       </ContentTemplate>

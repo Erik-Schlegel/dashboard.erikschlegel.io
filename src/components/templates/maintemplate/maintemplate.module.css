@@ -9,7 +9,8 @@
 
 .header
 {
-   height: 60px;
+   height: 68px;
+   padding: var(--M_Gap);
 }
 
 .content

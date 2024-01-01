@@ -13,7 +13,7 @@ type InputSelectProps = {
 };
 
 /* prettier-ignore */
-const InputSelect = ({ name, label, options, defaultIndex, onChange, className }: InputSelectProps) =>
+const InputSelect = ({ name, label, options, defaultIndex=0, onChange, className }: InputSelectProps) =>
 {
    return (
       <div className={classNames(styles.inputSelect, className)}>
@@ -22,11 +22,11 @@ const InputSelect = ({ name, label, options, defaultIndex, onChange, className }
                {label}
             </label>
          )}
-         <select name={name} onChange={onChange} className={styles.inputSelect__ui}>
+         <select name={name} onChange={onChange} defaultValue={options[defaultIndex]} className={styles.inputSelect__ui}>
             {
                options.map((option, i) =>
                (
-                  <option key={i} value={option} selected={i === defaultIndex}>
+                  <option key={i} value={option}>
                      {option}
                   </option>
                ))

@@ -13,15 +13,16 @@ type TodoItemProps = {
    title: string;
    onToggleOpen?: () => void;
    isOpen?: boolean;
+   className?: string;
 };
 
 /* prettier-ignore */
-const TodoItem = ({ title, onToggleOpen, isOpen = false }: TodoItemProps) =>
+const TodoItem = ({ title, onToggleOpen, isOpen = false, className }: TodoItemProps) =>
 {
 
    return (
 
-      <section className={styles.todoItem}>
+      <section className={classNames(styles.todoItem, className)}>
 
          <div className={styles.todoItem__titleArea}>
             <div>
@@ -42,27 +43,18 @@ const TodoItem = ({ title, onToggleOpen, isOpen = false }: TodoItemProps) =>
          >
             <div className={styles.todoItem__bodyArea__expandable}>
 
-               {
-                  isOpen && (
-                     <div className={styles.todoItemForm}>
+               <div className={styles.todoItemForm}>
+                  <div className={styles.todoItemForm__1st}>
+                     <InputText label="Title" name="title" placeholder="title" className={styles.todoItemForm__1st__doubleWide}  />
+                     <InputSelect label="Priority" name="priority" options={['low', 'medium', 'high']} defaultIndex={1} className={styles.todoItemForm__1st__doubleWide}  />
 
-                        <div className={styles.todoItemForm__1st}>
-                           <InputText label="Title" name="title" placeholder="title" className={styles.todoItemForm__1st__doubleWide}  />
-
-                           <InputSelect label="Priority" name="priority" options={['low', 'medium', 'high']} defaultIndex={1} />
-                           <InputSelect label="Bucket" name="bucket" options={['backlog', 'current', 'scheduled']} defaultIndex={0} />
-
-                           <InputDate label="Start On" name="startDate" />
-                           <InputDate label="Complete By" name="completeBy" />
-                        </div>
-                        <div className={styles.todoItemForm__2nd}>
-                           <InputTextArea label="Description" name="description" />
-                        </div>
-
-                     </div>
-                  )
-               }
-
+                     <InputDate label="Start On" name="startDate" />
+                     <InputDate label="Complete By" name="completeBy" />
+                  </div>
+                  <div className={styles.todoItemForm__2nd}>
+                     <InputTextArea label="Description" name="description" />
+                  </div>
+               </div>
 
             </div>
 

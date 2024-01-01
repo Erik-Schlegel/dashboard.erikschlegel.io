@@ -7,6 +7,10 @@
    padding: var(--M_Gap1\2);
 }
 
+.todoItem:last-of-type {
+   margin-bottom:0;
+}
+
 .todoItemForm__1st {
    display: grid;
    gap: var(--M_Gap);
