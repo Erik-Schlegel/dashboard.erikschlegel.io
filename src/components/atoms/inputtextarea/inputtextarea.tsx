@@ -6,12 +6,13 @@ import styles from "./inputtextarea.module.css";
 type InputTextAreaProps = {
    name: string;
    label?: string;
+   value?: string;
    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
    className?: string;
 };
 
 /* prettier-ignore */
-const InputTextArea = ({ name, label, onChange, className }: InputTextAreaProps) =>
+const InputTextArea = ({ name, label, value, onChange, className }: InputTextAreaProps) =>
 {
    return (
       <>
@@ -22,6 +23,7 @@ const InputTextArea = ({ name, label, onChange, className }: InputTextAreaProps)
          <textarea name={name}
             onChange={onChange}
             className={classNames(styles.inputTextArea, className)}
+            defaultValue={value}
          />
 
       </>

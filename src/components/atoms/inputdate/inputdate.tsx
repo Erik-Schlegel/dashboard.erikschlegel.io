@@ -3,6 +3,13 @@ import classNames from "classnames";
 
 import styles from "./inputdate.module.css";
 
+const formatDate = (date: Date) => {
+   const year = date.getFullYear();
+   const month = String(date.getMonth() + 1).padStart(2, "0");
+   const day = String(date.getDate()).padStart(2, "0");
+   return `${year}-${month}-${day}`;
+};
+
 type InputDateProps = {
    name: string;
    label?: string;
@@ -30,7 +37,7 @@ const InputDate = ({ name, label, onChange, minDate=new Date(), defaultValue=new
          <input type="date" name={name}
             onChange={onChange}
             min={min}
-            defaultValue={def}
+            defaultValue={formatDate(defaultValue)}
             className={styles.inputDate}
          />
       </div>
