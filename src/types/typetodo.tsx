@@ -2,6 +2,7 @@ import TypeBucket from "./typebucket";
 
 type TypeTodo = {
    id: string;
+   sortIndex: number;
    user: string;
    title: string;
    description: string;

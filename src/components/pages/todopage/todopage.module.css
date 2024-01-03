@@ -18,3 +18,9 @@
    flex-direction: column;
    border-radius: var(--M_BorderRadius);
 }
+
+.todoPage__collection__scrollableArea {
+   border: 1px solid var(--I_PrimaryBtnBorder);
+   padding: var(--M_Gap);
+   padding-bottom: 0;
+}

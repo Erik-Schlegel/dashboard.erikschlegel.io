@@ -13,7 +13,6 @@ import styles from "./todoitem.module.css";
 const priorityOptions = ["low", "medium", "high"];
 
 type TodoItemProps = {
-   index: number;
    data: any;
    onToggleOpen?: () => void;
    isOpen?: boolean;
@@ -21,66 +20,72 @@ type TodoItemProps = {
 };
 
 /* prettier-ignore */
-const TodoItem = ({ index, data, onToggleOpen, isOpen = false, className }: TodoItemProps) =>
+const TodoItem = ({ data, onToggleOpen, isOpen = false, className }: TodoItemProps) =>
 {
 
    return (
 
       <Draggable
-         draggableId={data.id}
-         index={index}>
-         {(provided) =>
-         (
-            <section
-               className={classNames(styles.todoItem, className)}
-               ref={provided.innerRef}
-               {...provided.draggableProps}
-            >
-
-               <div className={styles.todoItem__titleArea}>
-                  <div>
-                     <span className={styles.todoItem__titleArea__handle} {...provided.dragHandleProps}>:::</span>
-                     <span className={styles.todoItem__titleArea__title} onClick={onToggleOpen}>
-                        {data.title}
-                     </span>
-                  </div>
-                  <div className={styles.todoItem__titleArea__options}>
-                     <Button text="Delete" type='secondary' />
-                     <Button text="Complete"  />
-                  </div>
-               </div>
-
-               <aside className={classNames(
-                  styles.todoItem__bodyArea,
-                  isOpen && styles.todoItem__bodyArea__open)}
+         draggableId={ `${data.sortIndex}` }
+         index={ data.sortIndex }>
+         {
+            (provided) =>
+            (
+               <section
+                  className={classNames(styles.todoItem, className)}
+                  ref={ provided.innerRef }
+                  { ...provided.draggableProps }
                >
-                  <div className={styles.todoItem__bodyArea__expandable}>
 
-                     <div className={styles.todoItemForm}>
-                        <div className={styles.todoItemForm__1st}>
-                           <InputText label="Title" name="title"
-                              placeholder="title" className={styles.todoItemForm__1st__doubleWide}
-                              value={data.title}
-                           />
-                           <InputSelect label="Priority" name="priority"
-                              options={['low', 'medium', 'high']}
-                              defaultIndex={priorityOptions.indexOf(data.priority)}
-                              className={styles.todoItemForm__1st__doubleWide}
-                           />
+                  <div className={styles.todoItem__titleArea}>
+                     <div>
+                        <span className={styles.todoItem__titleArea__handle} {...provided.dragHandleProps}>:::</span>
+                        <span className={styles.todoItem__titleArea__title} onClick={onToggleOpen}>
+                           {data.title}
+                        </span>
+                     </div>
+                     <div className={styles.todoItem__titleArea__options}>
+                        <Button text="Delete" type='secondary' />
+                        <Button text="Complete"  />
+                     </div>
+                  </div>
 
-                           <InputDate label="Start On" name="startDate" defaultValue={data.startOn} />
-                           <InputDate label="Complete By" name="completeBy" defaultValue={data.endOn} />
-                        </div>
-                        <div className={styles.todoItemForm__2nd}>
-                           <InputTextArea label="Description" name="description" value={data.description} />
-                        </div>
+                  <aside className={classNames(
+                     styles.todoItem__bodyArea,
+                     isOpen && styles.todoItem__bodyArea__open)}
+                  >
+                     <div className={styles.todoItem__bodyArea__expandable}>
+
+                        {isOpen && (
+
+                           <div className={styles.todoItemForm}>
+                              <div className={styles.todoItemForm__1st}>
+                                 <InputText label="Title" name="title"
+                                    placeholder="title" className={styles.todoItemForm__1st__doubleWide}
+                                    value={data.title}
+                                 />
+                                 <InputSelect label="Priority" name="priority"
+                                    options={['low', 'medium', 'high']}
+                                    defaultIndex={priorityOptions.indexOf(data.priority)}
+                                    className={styles.todoItemForm__1st__doubleWide}
+                                 />
+
+                                 <InputDate label="Start On" name="startDate" defaultValue={data.startOn} />
+                                 <InputDate label="Complete By" name="completeBy" defaultValue={data.endOn} />
+                              </div>
+                              <div className={styles.todoItemForm__2nd}>
+                                 <InputTextArea label="Description" name="description" value={data.description} />
+                              </div>
+                           </div>
+
+                        )}
+
                      </div>
 
-                  </div>
-
-               </aside>
-            </section>
-         )}
+                  </aside>
+               </section>
+            )
+         }
 
       </Draggable>
   )

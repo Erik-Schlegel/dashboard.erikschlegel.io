@@ -1,16 +1,18 @@
 import React from "react";
+import classNames from "classnames";
 
 import styles from "./scrollablearea.module.css";
 
 type ScrollableAreaProps = {
    children: React.ReactNode;
+   className?: string;
 };
 
 /* prettier-ignore */
-const ScrollableArea = ({ children }: ScrollableAreaProps) =>
+const ScrollableArea = ({ children, className }: ScrollableAreaProps) =>
 {
    return (
-      <div className={styles.scrollableArea}>
+      <div className={classNames(styles.scrollableArea, className)}>
          {children}
       </div>
    );

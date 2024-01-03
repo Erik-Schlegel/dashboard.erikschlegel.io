@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 
 import ScrollableArea from "_atoms/scrollablearea/scrollablearea";
 import TodoBucketCollection from "_atoms/todobucketcollection/todobucketcollection";
@@ -18,12 +18,13 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 const nextWeek = new Date();
 nextWeek.setDate(nextWeek.getDate() + 7);
 
-const items: TypeTodo[] = [
+const original_items: TypeTodo[] = [
    {
       id: "abc",
+      sortIndex: 0,
       user: "user1",
       title: "backlog abc",
-      description: "abcdef description",
+      description: "abc description",
       bucket: "backlog",
       priority: "high",
       startOn: tomorrow,
@@ -31,19 +32,32 @@ const items: TypeTodo[] = [
    },
    {
       id: "def",
+      sortIndex: 1,
       user: "user1",
-      title: "current abc",
-      description: "abcdef description",
+      title: "current def",
+      description: "def description",
       bucket: "current",
       priority: "high",
       startOn: tomorrow,
       endOn: nextWeek,
    },
    {
-      id: "abcdef",
+      id: "ghi",
+      sortIndex: 0,
       user: "user1",
-      title: "scheduled abc",
-      description: "abcdef description",
+      title: "current ghi",
+      description: "ghi description",
+      bucket: "current",
+      priority: "medium",
+      startOn: tomorrow,
+      endOn: nextWeek,
+   },
+   {
+      id: "jkl",
+      sortIndex: 0,
+      user: "user1",
+      title: "scheduled jkl",
+      description: "jkl description",
       bucket: "scheduled",
       priority: "high",
       startOn: tomorrow,
@@ -55,13 +69,122 @@ const items: TypeTodo[] = [
 
 const TodoPage = () =>
 {
+
    const [openItem, setOpenItem] = useState<string | null>(null);
    const [bucketMode, setBucketMode] = useState<TypeBucket>('current');
+   const [items, setItems] = useState<TypeTodo[]>(original_items);
 
-   const handleToggleOpen = (title: string) =>
-      setOpenItem(openItem === title ? null : title);
 
-   const handleDragEnd = (response: any)=> console.log(response);
+   const getReorderedTodoItems = (items: TypeTodo[], fromBucket: TypeBucket, fromIndex: number, toBucket: TypeBucket, toIndex: number) : TypeTodo[]|null =>
+   {
+      const newState = [...items];
+
+      const movedItem = newState.find(item =>
+         item.bucket === bucketMode &&
+         item.sortIndex === fromIndex
+      );
+
+      if(!movedItem) return null;
+
+      if(fromBucket === toBucket)
+      {
+         //direction of ripple effect
+         //change sortIndex for all items between toIndex and fromIndex
+
+         if(fromIndex > toIndex)
+         {
+            const sortedItems = items
+               .filter(item =>
+                  item.bucket === bucketMode &&
+                  item.sortIndex >= toIndex &&
+                  item.sortIndex < fromIndex
+               )
+
+            sortedItems.forEach(item => item.sortIndex += 1);
+         }
+         else
+         {
+            const sortedItems = items
+               .filter(item =>
+                  item.bucket === bucketMode &&
+                  item.sortIndex <= toIndex &&
+                  item.sortIndex > fromIndex
+               )
+            sortedItems.forEach(item => item.sortIndex -= 1);
+         }
+
+         movedItem.sortIndex = toIndex;
+      }
+      else
+      {
+         const atIndex = getLastItemSortIndexInBucket(newState, toBucket);
+         movedItem.sortIndex = atIndex;
+         movedItem.bucket = toBucket;
+
+         newState
+            .filter(item=>
+               item.bucket === bucketMode &&
+               item.sortIndex > fromIndex
+            )
+            .forEach(item=> item.sortIndex -= 1);
+
+         console.log(newState.filter(item=> item.bucket === bucketMode));
+      }
+
+      return newState;
+   }
+
+
+   const getLastItemSortIndexInBucket = (items: TypeTodo[], bucket: TypeBucket) : number =>
+   {
+      const itemsInBucket = items.filter(item => item.bucket === bucket);
+      if(itemsInBucket.length === 0) return 0;
+
+      return (
+         itemsInBucket.sort((a,b)=> a.sortIndex - b.sortIndex)[itemsInBucket.length -1].sortIndex + 1
+      );
+   }
+
+
+   const handleToggleOpen = (id: string) =>
+      setOpenItem(openItem === id ? null : id);
+
+
+   const handleAddTodoClick = ()=>
+   {
+      const newTodo: TypeTodo = {
+         id: `new-${Date.now()}`,
+         sortIndex: getLastItemSortIndexInBucket(items, bucketMode),
+         user: "user1",
+         title: "new todo",
+         description: "new todo description",
+         bucket: bucketMode,
+         priority: "low",
+         startOn: tomorrow,
+         endOn: nextWeek,
+      };
+
+      let newitems = [...items, newTodo]
+      setItems(newitems);
+   }
+
+
+   const handleDragEnd = ({source, destination}: DropResult) =>
+   {
+      if(!destination) return; // dropped outside any droppable area
+
+      const fromIndex = source.index;
+      const fromBucket = source.droppableId as TypeBucket;
+
+      const toIndex = destination.index;
+      const toBucket = destination.droppableId as TypeBucket;
+
+      const newState = getReorderedTodoItems(items, fromBucket, fromIndex, toBucket, toIndex);
+
+      if(!newState) return;
+      setItems(newState);
+   }
+
 
    const handleBucketClick = (bucket: TypeBucket) => {
       setBucketMode(bucket);
@@ -81,23 +204,25 @@ const TodoPage = () =>
                <div className={styles.todoPage__collection}>
 
                   <div style={{marginBottom: 'var(--M_Gap)'}}>
-                     <Button text="Add" />
+                     <Button text="Add" onClick={handleAddTodoClick} />
                   </div>
 
-                  <ScrollableArea>
+                  <ScrollableArea className={styles.todoPage__collection__scrollableArea}>
                      <Droppable droppableId="todoSet">
                         {(provided) => (
 
                            <div {...provided.droppableProps} ref={provided.innerRef}>
-                              {items.filter(item => item.bucket === bucketMode).map((item, index) => (
-
-                                 <TodoItem
-                                    key={index}
-                                    index={index}
-                                    data={item}
-                                    isOpen={openItem === item.title} onToggleOpen={()=> handleToggleOpen(item.title)} />
-
-                              ))}
+                              {items
+                                 .filter(item => item.bucket === bucketMode)
+                                 .sort((a,b)=> a.sortIndex - b.sortIndex)
+                                 .map((item) => (
+                                    <TodoItem
+                                       key={item.sortIndex}
+                                       data={item}
+                                       isOpen={openItem === item.id} onToggleOpen={()=> handleToggleOpen(item.id)}
+                                    />
+                                 ))
+                              }
                               {provided.placeholder}
                            </div>
                         )}
