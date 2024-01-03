@@ -21,6 +21,7 @@ const InputTextArea = ({ name, label, value, onChange, className }: InputTextAre
             <label htmlFor={name} className={styles.label}>{label}</label>
          }
          <textarea name={name}
+            id={name}
             onChange={onChange}
             className={classNames(styles.inputTextArea, className)}
             defaultValue={value}

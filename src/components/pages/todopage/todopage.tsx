@@ -20,7 +20,7 @@ nextWeek.setDate(nextWeek.getDate() + 7);
 
 const original_items: TypeTodo[] = [
    {
-      id: "abc",
+      id: "a",
       sortIndex: 0,
       user: "user1",
       title: "backlog abc",
@@ -31,7 +31,18 @@ const original_items: TypeTodo[] = [
       endOn: nextWeek,
    },
    {
-      id: "def",
+      id: "b",
+      sortIndex: 0,
+      user: "user1",
+      title: "scheduled jkl",
+      description: "jkl description",
+      bucket: "scheduled",
+      priority: "high",
+      startOn: tomorrow,
+      endOn: nextWeek,
+   },
+   {
+      id: "c",
       sortIndex: 1,
       user: "user1",
       title: "current def",
@@ -42,24 +53,13 @@ const original_items: TypeTodo[] = [
       endOn: nextWeek,
    },
    {
-      id: "ghi",
+      id: "d",
       sortIndex: 0,
       user: "user1",
       title: "current ghi",
       description: "ghi description",
       bucket: "current",
       priority: "medium",
-      startOn: tomorrow,
-      endOn: nextWeek,
-   },
-   {
-      id: "jkl",
-      sortIndex: 0,
-      user: "user1",
-      title: "scheduled jkl",
-      description: "jkl description",
-      bucket: "scheduled",
-      priority: "high",
       startOn: tomorrow,
       endOn: nextWeek,
    },
@@ -150,6 +150,13 @@ const TodoPage = () =>
       setOpenItem(openItem === id ? null : id);
 
 
+   const handleTodoItemDataChange = (data: TypeTodo) =>
+      setItems(
+         previousItems=> previousItems.map(item => item.id === data.id ? data: item)
+      );
+
+
+
    const handleAddTodoClick = ()=>
    {
       const newTodo: TypeTodo = {
@@ -218,6 +225,7 @@ const TodoPage = () =>
                                  .map((item) => (
                                     <TodoItem
                                        key={item.sortIndex}
+                                       handleDataChange={handleTodoItemDataChange}
                                        data={item}
                                        isOpen={openItem === item.id} onToggleOpen={()=> handleToggleOpen(item.id)}
                                     />

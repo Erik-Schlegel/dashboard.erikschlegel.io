@@ -1,7 +1,7 @@
 .todoBucketCollection {
    height: 100%;
    display: grid;
-   grid-template-rows: repeat(3, 1fr);
+   grid-template-rows: repeat(4, 1fr);
    gap: var(--M_Gap);
 }
 

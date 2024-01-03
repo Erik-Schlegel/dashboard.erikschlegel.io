@@ -4,5 +4,5 @@
 open command panel and paste:
 
 ```js
-document.querySelector('.quick-input-widget').style.setProperty('left', '25%');
+document.querySelector('.quick-input-widget').style.setProperty('left', '75%');
 ```

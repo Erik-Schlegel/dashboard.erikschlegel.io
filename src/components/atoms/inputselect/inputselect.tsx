@@ -22,7 +22,7 @@ const InputSelect = ({ name, label, options, defaultIndex=0, onChange, className
                {label}
             </label>
          )}
-         <select name={name} onChange={onChange} defaultValue={options[defaultIndex]} className={styles.inputSelect__ui}>
+         <select id={name} name={name} onChange={onChange} defaultValue={options[defaultIndex]} className={styles.inputSelect__ui}>
             {
                options.map((option, i) =>
                (

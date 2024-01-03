@@ -1,9 +1,9 @@
 import React from "react";
-import classNames from "classnames";
 
 import styles from "./inputdate.module.css";
 
 const formatDate = (date: Date) => {
+   console.log(date);
    const year = date.getFullYear();
    const month = String(date.getMonth() + 1).padStart(2, "0");
    const day = String(date.getDate()).padStart(2, "0");
@@ -19,13 +19,11 @@ type InputDateProps = {
    className?: string;
 };
 
+const d = new Date();
+
 /* prettier-ignore */
-const InputDate = ({ name, label, onChange, minDate=new Date(), defaultValue=new Date(), className }: InputDateProps) =>
+const InputDate = ({ name, label, onChange, minDate=d, defaultValue=d, className }: InputDateProps) =>
 {
-   const min = `${minDate.getFullYear()}-${String(minDate.getMonth() + 1).padStart(2, '0')}-${String(minDate.getDate()).padStart(2, '0')}`;
-   const def = `${defaultValue.getFullYear()}-${String(defaultValue.getMonth() + 1).padStart(2, '0')}-${String(defaultValue.getDate()).padStart(2, '0')}`;
-
-
    return (
       <div className={className}>
          {
@@ -35,8 +33,9 @@ const InputDate = ({ name, label, onChange, minDate=new Date(), defaultValue=new
             </label>
          }
          <input type="date" name={name}
+            id={name}
             onChange={onChange}
-            min={min}
+            min={formatDate(minDate)}
             defaultValue={formatDate(defaultValue)}
             className={styles.inputDate}
          />

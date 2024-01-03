@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import classNames from "classnames";
 import { Draggable } from "react-beautiful-dnd";
 
@@ -9,19 +9,46 @@ import InputDate from "_atoms/inputdate/inputdate";
 import InputTextArea from "_atoms/inputtextarea/inputtextarea";
 
 import styles from "./todoitem.module.css";
+import TypeTodo from "_types/typetodo";
 
-const priorityOptions = ["low", "medium", "high"];
+const priorityOptions = ["high", "medium", "low"];
 
 type TodoItemProps = {
-   data: any;
+   data: TypeTodo;
+   handleDataChange?: (data: TypeTodo) => void;
    onToggleOpen?: () => void;
    isOpen?: boolean;
    className?: string;
 };
 
 /* prettier-ignore */
-const TodoItem = ({ data, onToggleOpen, isOpen = false, className }: TodoItemProps) =>
+const TodoItem = ({ data, handleDataChange, onToggleOpen, isOpen = false, className }: TodoItemProps) =>
 {
+   const localData = useRef(data)!;
+
+   useEffect(
+      ()=>{
+         localData.current = data;
+      },
+      [localData, data]
+   )
+
+   const handleBlur = (event: React.FocusEvent<HTMLFormElement>) =>
+   {
+      if(event.relatedTarget || !handleDataChange) return;
+      if(!localData.current) return;
+      handleDataChange(localData.current);
+   }
+
+
+   const handleChange = (event: React.FormEvent<HTMLFormElement>) =>
+   {
+      const target = event.target as HTMLInputElement;
+      const { name, value } = target;
+
+      if(name in localData.current!)
+         (localData.current! as any)[name] = value
+    };
 
    return (
 
@@ -58,25 +85,28 @@ const TodoItem = ({ data, onToggleOpen, isOpen = false, className }: TodoItemPro
 
                         {isOpen && (
 
-                           <div className={styles.todoItemForm}>
-                              <div className={styles.todoItemForm__1st}>
-                                 <InputText label="Title" name="title"
-                                    placeholder="title" className={styles.todoItemForm__1st__doubleWide}
-                                    value={data.title}
-                                 />
-                                 <InputSelect label="Priority" name="priority"
-                                    options={['low', 'medium', 'high']}
-                                    defaultIndex={priorityOptions.indexOf(data.priority)}
-                                    className={styles.todoItemForm__1st__doubleWide}
-                                 />
+                           <form onBlur={handleBlur} onChange={handleChange}>
+                              <div className={styles.todoItemForm}>
+                                 <div className={styles.todoItemForm__1st}>
+                                    <InputText label="Title" name="title"
+                                       placeholder="title" className={styles.todoItemForm__1st__doubleWide}
+                                       value={data.title}
+                                    />
+                                    <InputSelect label="Priority" name="priority"
+                                       options={priorityOptions}
+                                       defaultIndex={priorityOptions.indexOf(data.priority)}
+                                       className={styles.todoItemForm__1st__doubleWide}
+                                    />
 
-                                 <InputDate label="Start On" name="startDate" defaultValue={data.startOn} />
-                                 <InputDate label="Complete By" name="completeBy" defaultValue={data.endOn} />
+                                    <InputDate label="Start By" name="startOn" defaultValue={data.startOn} />
+                                    <InputDate label="Complete By" name="endOn" defaultValue={data.endOn} />
+                                 </div>
+                                 <div className={styles.todoItemForm__2nd}>
+                                    <InputTextArea label="Description" name="description" value={data.description} />
+                                 </div>
                               </div>
-                              <div className={styles.todoItemForm__2nd}>
-                                 <InputTextArea label="Description" name="description" value={data.description} />
-                              </div>
-                           </div>
+                           </form>
+
 
                         )}
 

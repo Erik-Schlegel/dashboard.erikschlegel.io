@@ -20,6 +20,7 @@ const InputText = ({name, value, label, placeholder, onChange, className}: Input
             <label htmlFor={name} className={styles.label}>{label}</label>
          )}
          <input type='text'
+            id={name}
             defaultValue={value}
             name={name}
             placeholder={placeholder}

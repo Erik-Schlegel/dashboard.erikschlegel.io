@@ -6,7 +6,7 @@ import { Droppable } from "react-beautiful-dnd";
 
 import styles from "./todobucketcollection.module.css";
 
-const buckets: TypeBucket[] = ["backlog", "current", "scheduled"];
+const buckets: TypeBucket[] = ["backlog", "scheduled", "current", "complete"];
 
 type TodoBucketCollectionProps = {
    activeBucket?: TypeBucket;
