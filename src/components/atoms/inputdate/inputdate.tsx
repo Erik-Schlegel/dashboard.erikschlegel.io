@@ -1,28 +1,26 @@
 import React from "react";
+import moment from "moment";
 
 import styles from "./inputdate.module.css";
-
-const formatDate = (date: Date) => {
-   console.log(date);
-   const year = date.getFullYear();
-   const month = String(date.getMonth() + 1).padStart(2, "0");
-   const day = String(date.getDate()).padStart(2, "0");
-   return `${year}-${month}-${day}`;
-};
 
 type InputDateProps = {
    name: string;
    label?: string;
    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-   minDate?: Date;
-   defaultValue?: Date;
+   minDate?: Date | string;
+   defaultValue?: Date | string;
    className?: string;
 };
 
-const d = new Date();
+const getDateString = (date: Date | string) => {
+   if (typeof date === "string") return date;
+   return moment(date).format("YYYY-MM-DD");
+};
+
+const todayString = moment().format("YYYY-MM-DD");
 
 /* prettier-ignore */
-const InputDate = ({ name, label, onChange, minDate=d, defaultValue=d, className }: InputDateProps) =>
+const InputDate = ({ name, label, onChange, minDate=todayString, defaultValue='', className }: InputDateProps) =>
 {
    return (
       <div className={className}>
@@ -35,8 +33,8 @@ const InputDate = ({ name, label, onChange, minDate=d, defaultValue=d, className
          <input type="date" name={name}
             id={name}
             onChange={onChange}
-            min={formatDate(minDate)}
-            defaultValue={formatDate(defaultValue)}
+            min={ getDateString(minDate) }
+            defaultValue={ getDateString(defaultValue)}
             className={styles.inputDate}
          />
       </div>

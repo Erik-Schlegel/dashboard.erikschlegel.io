@@ -15,29 +15,26 @@ const priorityOptions = ["high", "medium", "low"];
 
 type TodoItemProps = {
    data: TypeTodo;
-   handleDataChange?: (data: TypeTodo) => void;
+   onDataChange?: (data: TypeTodo) => void;
+   onDelete?: (data: string) => void;
    onToggleOpen?: () => void;
    isOpen?: boolean;
    className?: string;
 };
 
 /* prettier-ignore */
-const TodoItem = ({ data, handleDataChange, onToggleOpen, isOpen = false, className }: TodoItemProps) =>
+const TodoItem = ({ data, onDataChange, onDelete, onToggleOpen, isOpen = false, className }: TodoItemProps) =>
 {
-   const localData = useRef(data)!;
+   const localData = useRef(data);
 
-   useEffect(
-      ()=>{
-         localData.current = data;
-      },
-      [localData, data]
-   )
+   useEffect(()=>{ localData.current = data; }, [localData, data]);
+
 
    const handleBlur = (event: React.FocusEvent<HTMLFormElement>) =>
    {
-      if(event.relatedTarget || !handleDataChange) return;
+      if(event.relatedTarget || !onDataChange) return;
       if(!localData.current) return;
-      handleDataChange(localData.current);
+      onDataChange(localData.current);
    }
 
 
@@ -48,7 +45,16 @@ const TodoItem = ({ data, handleDataChange, onToggleOpen, isOpen = false, classN
 
       if(name in localData.current!)
          (localData.current! as any)[name] = value
-    };
+   };
+
+
+   const handleDeleteClick = () => {
+      onToggleOpen && onToggleOpen();
+      onDelete && onDelete(data.id)
+   }
+
+
+
 
    return (
 
@@ -56,7 +62,7 @@ const TodoItem = ({ data, handleDataChange, onToggleOpen, isOpen = false, classN
          draggableId={ `${data.sortIndex}` }
          index={ data.sortIndex }>
          {
-            (provided) =>
+         (provided) =>
             (
                <section
                   className={classNames(styles.todoItem, className)}
@@ -68,12 +74,12 @@ const TodoItem = ({ data, handleDataChange, onToggleOpen, isOpen = false, classN
                      <div>
                         <span className={styles.todoItem__titleArea__handle} {...provided.dragHandleProps}>:::</span>
                         <span className={styles.todoItem__titleArea__title} onClick={onToggleOpen}>
-                           {data.title}
+                           {data.title || 'un-named'}
                         </span>
                      </div>
                      <div className={styles.todoItem__titleArea__options}>
-                        <Button text="Delete" type='secondary' />
-                        <Button text="Complete"  />
+                        <Button text="Delete" type='secondary' onClick={handleDeleteClick} />
+                        {/* <Button text="Complete"  /> */}
                      </div>
                   </div>
 

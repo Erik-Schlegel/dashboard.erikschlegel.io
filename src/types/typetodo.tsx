@@ -8,8 +8,8 @@ type TypeTodo = {
    description: string;
    bucket: TypeBucket;
    priority: string;
-   startOn: Date;
-   endOn: Date;
+   startOn: string;
+   endOn: string;
 };
 
 export default TypeTodo;

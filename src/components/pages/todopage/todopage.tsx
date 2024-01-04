@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
+import moment from "moment";
 
 import ScrollableArea from "_atoms/scrollablearea/scrollablearea";
 import TodoBucketCollection from "_atoms/todobucketcollection/todobucketcollection";
@@ -12,11 +13,8 @@ import TypeBucket from "_types/typebucket";
 
 import styles from "./todopage.module.css";
 
-const tomorrow = new Date();
-tomorrow.setDate(tomorrow.getDate() + 1);
-
-const nextWeek = new Date();
-nextWeek.setDate(nextWeek.getDate() + 7);
+const tomorrowString = moment().add(1, "days").format("YYYY-MM-DD");
+const nextWeekString = moment().add(7, "days").format("YYYY-MM-DD");
 
 const original_items: TypeTodo[] = [
    {
@@ -27,8 +25,8 @@ const original_items: TypeTodo[] = [
       description: "abc description",
       bucket: "backlog",
       priority: "high",
-      startOn: tomorrow,
-      endOn: nextWeek,
+      startOn: tomorrowString,
+      endOn: nextWeekString,
    },
    {
       id: "b",
@@ -38,8 +36,8 @@ const original_items: TypeTodo[] = [
       description: "jkl description",
       bucket: "scheduled",
       priority: "high",
-      startOn: tomorrow,
-      endOn: nextWeek,
+      startOn: tomorrowString,
+      endOn: nextWeekString,
    },
    {
       id: "c",
@@ -49,8 +47,8 @@ const original_items: TypeTodo[] = [
       description: "def description",
       bucket: "current",
       priority: "high",
-      startOn: tomorrow,
-      endOn: nextWeek,
+      startOn: tomorrowString,
+      endOn: nextWeekString,
    },
    {
       id: "d",
@@ -60,8 +58,8 @@ const original_items: TypeTodo[] = [
       description: "ghi description",
       bucket: "current",
       priority: "medium",
-      startOn: tomorrow,
-      endOn: nextWeek,
+      startOn: tomorrowString,
+      endOn: nextWeekString,
    },
 ];
 
@@ -128,7 +126,6 @@ const TodoPage = () =>
             )
             .forEach(item=> item.sortIndex -= 1);
 
-         console.log(newState.filter(item=> item.bucket === bucketMode));
       }
 
       return newState;
@@ -150,29 +147,30 @@ const TodoPage = () =>
       setOpenItem(openItem === id ? null : id);
 
 
-   const handleTodoItemDataChange = (data: TypeTodo) =>
+   const handleTodoDataChange = (data: TypeTodo) =>
       setItems(
          previousItems=> previousItems.map(item => item.id === data.id ? data: item)
       );
 
 
-
    const handleAddTodoClick = ()=>
    {
+      const id = `new-${Date.now()}`;
       const newTodo: TypeTodo = {
-         id: `new-${Date.now()}`,
+         id,
          sortIndex: getLastItemSortIndexInBucket(items, bucketMode),
          user: "user1",
-         title: "new todo",
-         description: "new todo description",
+         title: "",
+         description: "",
          bucket: bucketMode,
-         priority: "low",
-         startOn: tomorrow,
-         endOn: nextWeek,
+         priority: "medium",
+         startOn: '',
+         endOn: '',
       };
 
       let newitems = [...items, newTodo]
       setItems(newitems);
+      setOpenItem(id);
    }
 
 
@@ -189,6 +187,13 @@ const TodoPage = () =>
       const newState = getReorderedTodoItems(items, fromBucket, fromIndex, toBucket, toIndex);
 
       if(!newState) return;
+      setItems(newState);
+   }
+
+
+   const handleDelete = (id: string) =>
+   {
+      const newState = items.filter(item => item.id !== id);
       setItems(newState);
    }
 
@@ -224,10 +229,12 @@ const TodoPage = () =>
                                  .sort((a,b)=> a.sortIndex - b.sortIndex)
                                  .map((item) => (
                                     <TodoItem
-                                       key={item.sortIndex}
-                                       handleDataChange={handleTodoItemDataChange}
-                                       data={item}
-                                       isOpen={openItem === item.id} onToggleOpen={()=> handleToggleOpen(item.id)}
+                                       key={ item.sortIndex }
+                                       data={ item }
+                                       isOpen={ openItem === item.id }
+                                       onDelete={ handleDelete }
+                                       onDataChange={ handleTodoDataChange }
+                                       onToggleOpen={ ()=> handleToggleOpen(item.id)}
                                     />
                                  ))
                               }
