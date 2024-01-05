@@ -4,17 +4,18 @@ import classNames from "classnames";
 import styles from "./button.module.css";
 
 type ButtonProps = {
-   text: string;
+   text?: string;
+   children?: React.ReactNode;
    onClick?: () => void;
-   type?: "primary" | "secondary" | "disabled";
+   type?: "primary" | "secondary" | "disabled" | "icon";
 };
 
 /* prettier-ignore */
-const Button = ({ text, onClick, type='primary' }: ButtonProps) =>
+const Button = ({ text='', children=null, onClick, type='primary' }: ButtonProps) =>
 {
    return (
       <button onClick={onClick} className={classNames(styles.button, styles[type])}>
-         {text}
+         {text}{children}
       </button>
    );
 };

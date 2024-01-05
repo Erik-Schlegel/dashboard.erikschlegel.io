@@ -1,14 +1,21 @@
 import React from "react";
+import TypeIcon from "_types/typeicon";
 
-type IconProps = {
-   src: string;
-   alt: string;
-   width?: number;
-   height?: number | "auto";
-};
-
-const Icon = ({ src, alt, width = 44, height = "auto" }: IconProps) => (
-   <img src={src} alt={alt} width={width} height={height} />
+const Icon = ({
+   src,
+   alt,
+   width = 44,
+   height = "auto",
+   className,
+}: TypeIcon) => (
+   <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      className={className}
+      color="white"
+   />
 );
 
 export default Icon;

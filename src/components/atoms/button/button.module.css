@@ -9,6 +9,26 @@
    font-size: 1.7rem;
    display: block;
    cursor: pointer;
+   position: relative;
+   transition: all 0.1s ease-in;
+}
+
+.button::after {
+   transition: opacity 0.1s ease-in;
+   background: linear-gradient(0, transparent, 75%, #ffffff3d);
+   content: '';
+   display: block;
+   height: 100%;
+   width: 100%;
+   position: absolute;
+   top: 0;
+   left: 0;
+   opacity: 0;
+   border-radius: var(--M_BorderRadius);
+}
+
+.button:hover::after {
+   opacity: 1;
 }
 
 .primary {
@@ -40,3 +60,7 @@
    cursor: not-allowed;
 }
 
+.icon {
+   background-color: transparent;
+   border: 0;
+}

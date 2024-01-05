@@ -215,9 +215,12 @@ const TodoPage = () =>
 
                <div className={styles.todoPage__collection}>
 
-                  <div style={{marginBottom: 'var(--M_Gap)'}}>
-                     <Button text="Add" onClick={handleAddTodoClick} />
-                  </div>
+                  {
+                     bucketMode !== 'complete' &&
+                     <div style={{marginBottom: 'var(--M_Gap)'}}>
+                        <Button text="Add" onClick={handleAddTodoClick} />
+                     </div>
+                  }
 
                   <ScrollableArea className={styles.todoPage__collection__scrollableArea}>
                      <Droppable droppableId="todoSet">

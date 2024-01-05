@@ -2,11 +2,12 @@ import React, { useEffect, useRef } from "react";
 import classNames from "classnames";
 import { Draggable } from "react-beautiful-dnd";
 
-import Button from "_atoms/button/button";
 import InputText from "_atoms/inputtext/inputtext";
 import InputSelect from "_atoms/inputselect/inputselect";
 import InputDate from "_atoms/inputdate/inputdate";
 import InputTextArea from "_atoms/inputtextarea/inputtextarea";
+
+import IconDeleteButton from "_atoms/icondeletebutton/icondeletebutton";
 
 import styles from "./todoitem.module.css";
 import TypeTodo from "_types/typetodo";
@@ -17,7 +18,7 @@ type TodoItemProps = {
    data: TypeTodo;
    onDataChange?: (data: TypeTodo) => void;
    onDelete?: (data: string) => void;
-   onToggleOpen?: () => void;
+   onToggleOpen?: (id: string) => void;
    isOpen?: boolean;
    className?: string;
 };
@@ -28,7 +29,6 @@ const TodoItem = ({ data, onDataChange, onDelete, onToggleOpen, isOpen = false, 
    const localData = useRef(data);
 
    useEffect(()=>{ localData.current = data; }, [localData, data]);
-
 
    const handleBlur = (event: React.FocusEvent<HTMLFormElement>) =>
    {
@@ -49,20 +49,22 @@ const TodoItem = ({ data, onDataChange, onDelete, onToggleOpen, isOpen = false, 
 
 
    const handleDeleteClick = () => {
-      onToggleOpen && onToggleOpen();
+      onToggleOpen && onToggleOpen(data.id);
       onDelete && onDelete(data.id)
    }
 
 
+   const handleToggleOpen = () => {
+      onToggleOpen && onToggleOpen(data.id);
+   }
 
 
+   /* prettier-ignore */
    return (
 
-      <Draggable
-         draggableId={ `${data.sortIndex}` }
-         index={ data.sortIndex }>
+      <Draggable draggableId={ `${data.sortIndex}` } index={ data.sortIndex }>
          {
-         (provided) =>
+            (provided) =>
             (
                <section
                   className={classNames(styles.todoItem, className)}
@@ -70,18 +72,22 @@ const TodoItem = ({ data, onDataChange, onDelete, onToggleOpen, isOpen = false, 
                   { ...provided.draggableProps }
                >
 
+
+
                   <div className={styles.todoItem__titleArea}>
                      <div>
-                        <span className={styles.todoItem__titleArea__handle} {...provided.dragHandleProps}>:::</span>
-                        <span className={styles.todoItem__titleArea__title} onClick={onToggleOpen}>
+                        <span className={styles.todoItem__titleArea__handle} {...provided.dragHandleProps}>
+                           :::
+                        </span>
+                        <span className={styles.todoItem__titleArea__title} onClick={handleToggleOpen}>
                            {data.title || 'un-named'}
                         </span>
                      </div>
                      <div className={styles.todoItem__titleArea__options}>
-                        <Button text="Delete" type='secondary' onClick={handleDeleteClick} />
-                        {/* <Button text="Complete"  /> */}
+                        <IconDeleteButton onClick={handleDeleteClick}/>
                      </div>
                   </div>
+
 
                   <aside className={classNames(
                      styles.todoItem__bodyArea,
@@ -90,7 +96,6 @@ const TodoItem = ({ data, onDataChange, onDelete, onToggleOpen, isOpen = false, 
                      <div className={styles.todoItem__bodyArea__expandable}>
 
                         {isOpen && (
-
                            <form onBlur={handleBlur} onChange={handleChange}>
                               <div className={styles.todoItemForm}>
                                  <div className={styles.todoItemForm__1st}>
@@ -112,8 +117,6 @@ const TodoItem = ({ data, onDataChange, onDelete, onToggleOpen, isOpen = false, 
                                  </div>
                               </div>
                            </form>
-
-
                         )}
 
                      </div>
